@@ -10,7 +10,7 @@ function SubmitForm() {
 
   // Fetch stores for the dropdown
   useEffect(() => {
-    axios.get('https://conbini-quest.onrender.com')
+    axios.get('https://conbini-quest.onrender.com/api/stores')
       .then(response => {
         setStores(response.data);
         if (response.data.length > 0) {
@@ -34,7 +34,7 @@ function SubmitForm() {
     };
 
     try {
-      await axios.post('https://conbini-quest.onrender.com', newItem);
+      await axios.post('https://conbini-quest.onrender.com/api/items', newItem)
       setMessage('Item submitted successfully!');
       // Clear the form
       setItemName('');

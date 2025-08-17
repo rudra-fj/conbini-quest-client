@@ -10,7 +10,7 @@ function ItemList() {
   // This useEffect hook runs once when the component loads.
   useEffect(() => {
     // We ask our backend server for the list of items.
-    axios.get('https://conbini-quest.onrender.com')
+   axios.get('https://conbini-quest.onrender.com/api/items')
       .then(response => {
         // If successful, we update our 'items' variable with the data.
         setItems(response.data);

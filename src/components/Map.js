@@ -7,7 +7,7 @@ function Map() {
   const tokyoPosition = [35.6895, 139.6917]; // Coordinates for Tokyo
 
   useEffect(() => {
-    axios.get('https://conbini-quest.onrender.com')
+    axios.get('https://conbini-quest.onrender.com/api/stores')
       .then(response => {
         setStores(response.data);
       })
