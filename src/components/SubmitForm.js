@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 function SubmitForm() {
-  const [stores, setStores] = useState([]);
+  // Define the same list of stores for the dropdown
+  const stores = [
+    { id: 1, name: 'FamilyMart Shinjuku', address: '1-1-5 Nishi-Shinjuku, Shinjuku-ku, Tokyo' },
+    { id: 2, name: 'Lawson Shibuya', address: '2-24-12 Shibuya, Shibuya-ku, Tokyo' },
+    { id: 3, name: '7-Eleven Akihabara', address: '1-15-9 Sotokanda, Chiyoda-ku, Tokyo' }
+  ];
+
   const [itemName, setItemName] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedStore, setSelectedStore] = useState('');
+  const [selectedStore, setSelectedStore] = useState('1'); // Default to the first store's ID
   const [message, setMessage] = useState('');
-
-  // Fetch stores for the dropdown
-  useEffect(() => {
-    axios.get('https://conbini-quest.onrender.com/api/stores')
-      .then(response => {
-        setStores(response.data);
-        if (response.data.length > 0) {
-          setSelectedStore(response.data[0].id); // Default to the first store
-        }
-      })
-      .catch(error => console.error('Error fetching stores:', error));
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,8 +28,9 @@ function SubmitForm() {
     };
 
     try {
-      await axios.post('https://conbini-quest.onrender.com/api/items', newItem)
-      setMessage('Item submitted successfully!');
+      // This still talks to the live server
+      await axios.post('https://conbini-quest-server.onrender.com/api/items', newItem);
+      setMessage('Item submitted successfully! Refresh the page to see your find.');
       // Clear the form
       setItemName('');
       setDescription('');

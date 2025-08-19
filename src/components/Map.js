@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 function Map() {
-  const [stores, setStores] = useState([]);
+  // We are now defining the stores directly in the code, not fetching them.
+  const stores = [
+    { id: 1, name: 'FamilyMart Shinjuku', address: '1-1-5 Nishi-Shinjuku, Shinjuku-ku, Tokyo', latitude: 35.6897, longitude: 139.6987 },
+    { id: 2, name: 'Lawson Shibuya', address: '2-24-12 Shibuya, Shibuya-ku, Tokyo', latitude: 35.6595, longitude: 139.7006 },
+    { id: 3, name: '7-Eleven Akihabara', address: '1-15-9 Sotokanda, Chiyoda-ku, Tokyo', latitude: 35.7022, longitude: 139.7741 }
+  ];
   const tokyoPosition = [35.6895, 139.6917]; // Coordinates for Tokyo
-
-  useEffect(() => {
-    axios.get('https://conbini-quest.onrender.com/api/stores')
-      .then(response => {
-        setStores(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the stores!', error);
-      });
-  }, []);
 
   return (
     <div className="map-container">
